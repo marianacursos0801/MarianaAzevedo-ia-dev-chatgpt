@@ -212,6 +212,14 @@ textarea {
   font-size: 13px;
 }
 
+.queue-note {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 16px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .ticket-card {
   display: grid;
   gap: 8px;

@@ -1,4 +1,5 @@
 const STORAGE_KEY = "serviceDeskTickets";
+const priorityOrder = ["Crítica", "Alta", "Média", "Baixa"];
 
 const seedTickets = [
   {
@@ -129,12 +130,20 @@ function render() {
 
 function renderTicketList() {
   const term = searchInput.value.trim().toLowerCase();
-  const filteredTickets = tickets.filter((ticket) => {
-    return (
-      String(ticket.id).includes(term) ||
-      ticket.title.toLowerCase().includes(term)
-    );
-  });
+  const filteredTickets = tickets
+    .filter((ticket) => {
+      return (
+        String(ticket.id).includes(term) ||
+        ticket.title.toLowerCase().includes(term)
+      );
+    })
+    .sort((first, second) => {
+      const priorityDifference =
+        priorityRank(first.priority) - priorityRank(second.priority);
+
+      if (priorityDifference !== 0) return priorityDifference;
+      return new Date(first.createdAt) - new Date(second.createdAt);
+    });
 
   ticketCounter.textContent = `${filteredTickets.length} chamado${filteredTickets.length === 1 ? "" : "s"}`;
 
@@ -283,6 +292,11 @@ function statusClass(status) {
 
 function priorityClass(priority) {
   return `priority-${priority.toLowerCase()}`;
+}
+
+function priorityRank(priority) {
+  const rank = priorityOrder.indexOf(priority);
+  return rank === -1 ? priorityOrder.length : rank;
 }
 
 function formatDate(value) {
