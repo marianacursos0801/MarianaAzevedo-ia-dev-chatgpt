@@ -136,8 +136,7 @@ main {
 
 .form-panel,
 .details-panel,
-.ticket-list,
-.table-wrap {
+.ticket-list {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -327,28 +326,100 @@ textarea {
   padding-left: 18px;
 }
 
-.table-wrap {
-  overflow: auto;
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(230px, 1fr));
+  align-items: start;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 760px;
-}
-
-th,
-td {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--line);
-  text-align: left;
-  vertical-align: top;
-}
-
-th {
-  color: #344054;
+.kanban-column {
+  min-height: 220px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
   background: #f8fafc;
+}
+
+.kanban-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+
+.kanban-column-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.kanban-count {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  min-height: 26px;
+  border-radius: 999px;
+  padding: 0 7px;
+  color: var(--muted);
+  background: #eef2f7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.kanban-cards {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.kanban-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--panel);
+  box-shadow: 0 4px 12px rgba(23, 32, 51, 0.06);
+  overflow-wrap: anywhere;
+}
+
+.kanban-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kanban-ticket-id {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.kanban-card h4 {
+  margin: 10px 0 6px;
+  font-size: 15px;
+}
+
+.kanban-requester,
+.kanban-updated,
+.kanban-empty {
+  margin: 0;
+  color: var(--muted);
   font-size: 13px;
+}
+
+.kanban-updated {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.kanban-empty {
+  padding: 16px 4px;
+  text-align: center;
 }
 
 .toast {

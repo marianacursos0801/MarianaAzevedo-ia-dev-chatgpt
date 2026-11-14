@@ -21,7 +21,7 @@ Também é possível abrir diretamente o arquivo `index.html` com dois cliques.
 - Alteração de status.
 - Alteração de prioridade.
 - Registro de correção.
-- Histórico dos chamados.
+- Histórico dos chamados em quadros Kanban organizados por status.
 - Persistência simples usando `localStorage`.
 
 ## Arquivos principais
