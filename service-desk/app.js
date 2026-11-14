@@ -39,7 +39,7 @@ const seedTickets = [
 ];
 
 let tickets = loadTickets();
-let selectedTicketId = tickets[0]?.id ?? null;
+let selectedTicketId = tickets.find((ticket) => ticket.status !== "Resolvido")?.id ?? null;
 
 const views = document.querySelectorAll(".view");
 const tabs = document.querySelectorAll(".tab");
@@ -134,8 +134,11 @@ function renderTicketList() {
   const filteredTickets = tickets
     .filter((ticket) => {
       return (
-        String(ticket.id).includes(term) ||
-        ticket.title.toLowerCase().includes(term)
+        ticket.status !== "Resolvido" &&
+        (
+          String(ticket.id).includes(term) ||
+          ticket.title.toLowerCase().includes(term)
+        )
       );
     })
     .sort((first, second) => {
@@ -149,7 +152,10 @@ function renderTicketList() {
   ticketCounter.textContent = `${filteredTickets.length} chamado${filteredTickets.length === 1 ? "" : "s"}`;
 
   if (filteredTickets.length === 0) {
-    ticketList.innerHTML = '<div class="empty-state"><p>Nenhum chamado encontrado.</p></div>';
+    const emptyMessage = term
+      ? "Nenhum chamado encontrado."
+      : "Não há solicitações pendentes na fila.";
+    ticketList.innerHTML = `<div class="empty-state"><p>${emptyMessage}</p></div>`;
     return;
   }
 
@@ -269,6 +275,11 @@ function updateSelectedTicket(ticketId) {
   ticket.correction = newCorrection;
   ticket.updatedAt = new Date().toISOString();
   ticket.events = ticket.events.concat(eventList);
+  saveTickets();
+
+  if (newStatus === "Resolvido" && ticket.id === selectedTicketId) {
+    selectedTicketId = null;
+  }
 
   showToast(`Chamado #${ticket.id} atualizado.`);
   render();

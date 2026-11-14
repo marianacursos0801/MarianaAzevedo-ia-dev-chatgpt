@@ -17,7 +17,7 @@ Também é possível abrir diretamente o arquivo `index.html` com dois cliques.
 
 - Tela do usuário para abrir chamados.
 - Painel do analista para selecionar chamados.
-- Fila de atendimento ordenada por prioridade (Crítica, Alta, Média e Baixa), com os mais antigos primeiro em caso de empate.
+- Fila de atendimento sem chamados resolvidos, ordenada por prioridade (Crítica, Alta, Média e Baixa), com os mais antigos primeiro em caso de empate.
 - Alteração de status.
 - Alteração de prioridade.
 - Registro de correção.
